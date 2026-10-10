@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal, Not Slop · Prithvi Datla</title>
+<meta name="description" content="Reputation is what people expect of you, based on evidence they trust. LinkedIn made that evidence cheap. Cosign can make it costly again.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://signal-not-slop.vercel.app/">
+<meta property="og:title" content="Signal, Not Slop">
+<meta property="og:description" content="Reputation is what people expect of you, based on evidence they trust. LinkedIn made that evidence cheap. Cosign can make it costly again.">
+<meta property="og:image" content="https://signal-not-slop.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Signal, Not Slop">
+<meta name="twitter:description" content="Reputation is what people expect of you, based on evidence they trust. LinkedIn made that evidence cheap. Cosign can make it costly again.">
+<meta name="twitter:image" content="https://signal-not-slop.vercel.app/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@200;300;400;500&family=Archivo:wdth,wght@75..100,400;75..100,600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff;--ink:#0a0a0a;--ink-2:#3a3a3a;--grey:#8a8a8a;--paper:#f2f2f2;
+  --rule:#0a0a0a24;--veil:#0a0a0a14;--gut:20px;--max:1440px;
+  --font-display:"Antonio","Arial Narrow",sans-serif;
+  --font-body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (min-width:768px){:root{--gut:32px}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.u{border-bottom:1px solid var(--ink);padding-bottom:1px;text-underline-offset:3px}
+.u:focus-visible,.nav-link:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.byline .u{display:inline-block;padding:6px 0 1px}
+.u:hover{opacity:.7}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+
+/* header */
+.site-header{border-bottom:1px solid var(--veil);height:65px;display:flex;align-items:center}
+.site-header .wrap{display:flex;justify-content:space-between;align-items:center}
+.wordmark{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.nav-link{display:inline-block;padding:12px 0;font-family:var(--font-body);font-size:13px;font-weight:600;font-stretch:75%;letter-spacing:.1em;text-transform:uppercase;opacity:.86}
+.nav-link:hover{opacity:1}
+
+/* type */
+.label{font-family:var(--font-body);font-size:13px;font-weight:600;font-stretch:75%;letter-spacing:.1em;text-transform:uppercase;line-height:1.2;margin:0}
+.mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;line-height:1.4}
+.display{font-family:var(--font-display);text-transform:uppercase;letter-spacing:-.02em;margin:0;font-weight:200;line-height:1.04;text-wrap:balance}
+.h-hero{font-size:min(17vw - 6px,96px);line-height:1.16}
+@media (min-width:768px){.h-hero{font-size:min(10vw,140px)}}
+.h-md{font-size:clamp(30px,3.4vw,46px);font-weight:300;line-height:1.08}
+.lede{margin:0;font-size:18px;line-height:1.6}
+@media (min-width:768px){.lede{font-size:20px}}
+
+/* hero */
+.hero{padding:72px 0 56px;border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;gap:32px}
+.hero .label{margin-bottom:24px}
+.hero-side .lede{max-width:44ch;text-wrap:pretty}
+.byline{margin-top:24px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.byline .mono{opacity:.7}
+@media (min-width:900px){
+  .hero{padding:96px 0 72px}
+  .hero-grid{grid-template-columns:140px 1fr 1.2fr;gap:32px;align-items:end}
+  .hero-grid > div:first-child{grid-column:1 / 3}
+  .hero-side{grid-column:3;padding-bottom:10px}
+}
+
+/* sections */
+.row{display:grid;gap:12px;padding-block:40px;border-bottom:1px solid var(--rule)}
+@media (max-width:899px){.row h2{margin-bottom:14px}}
+@media (min-width:900px){.row{grid-template-columns:140px 1fr 1.2fr;gap:32px;align-items:baseline;padding-block:48px}}
+.row .mono{opacity:.7}
+.prose p{max-width:62ch;margin:0 0 1.1em;font-size:17px;line-height:1.7;text-wrap:pretty}
+.prose p.label{font-size:13px;line-height:1.2;margin:0 0 8px}
+.prose p:last-child{margin-bottom:0}
+.prose strong{font-weight:600}
+.qa{margin:0 0 1.4em;max-width:60ch}
+.qa:last-child{margin-bottom:0}
+.qa .label{margin-bottom:8px}
+.qa p{margin:0}
+
+/* table */
+.grid{width:100%;max-width:60ch;border-collapse:collapse;margin:4px 0 1.6em;font-size:17px}
+.grid th,.grid td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--rule);vertical-align:baseline}
+.grid thead th{font-family:var(--font-mono);font-weight:400;font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.7;border-bottom:1px solid var(--ink)}
+.grid tbody th{font-weight:600;white-space:nowrap}
+.grid tr.goal th,.grid tr.goal td{background:var(--ink);color:#fff;border-bottom:0}
+.grid tr.goal th{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.02em;font-size:22px;line-height:1}
+.grid tr.goal td{font-weight:600}
+@media (max-width:600px){
+  .grid{font-size:18px}
+  .grid th,.grid td{padding:14px 10px}
+  .grid thead th{font-size:12px}
+  .grid tr.goal th{font-size:24px}
+  .grid tr.goal td{font-size:19px}
+}
+
+.list{margin:0;padding:0;list-style:none;counter-reset:n;max-width:60ch}
+.list li{text-wrap:pretty;counter-increment:n;display:grid;grid-template-columns:36px 1fr;gap:8px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:17px;line-height:1.6}
+.list li:first-child{border-top:1px solid var(--rule)}
+.list li::before{content:counter(n,decimal-leading-zero);font-family:var(--font-mono);font-size:12px;opacity:.7;padding-top:4px}
+.prose .end{margin-top:2em}
+/* thesis */
+.thesis{padding:72px 0;border-bottom:1px solid var(--rule)}
+.thesis .label{margin-bottom:24px}
+.thesis .display{font-size:clamp(36px,4.8vw,72px);font-weight:300;max-width:30ch}
+
+/* close */
+.close{padding:48px 0 32px}
+.close p{font-size:17px;margin:0}
+.foot{padding-top:24px;padding-bottom:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot .mono{opacity:.7}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <span class="wordmark">Signal, Not Slop</span>
+    <a class="nav-link" href="https://x.com/prithvidatla">Prithvi Datla</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="label">A note on Cosign</p>
+        <h1 class="display h-hero">Signal,<br>Not Slop</h1>
+      </div>
+      <div class="hero-side">
+        <p class="lede">As I see it, Cosign wants to be LinkedIn without the slop. Here is how I think about the problem, and a few possible ways forward.</p>
+        <div class="byline">
+          <span class="mono">By</span>
+          <a class="u" href="https://x.com/prithvidatla">Prithvi Datla</a>
+          <span class="mono">Oct 2026 · 3 min read</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">01</span>
+    <h2 class="display h-md">It's about reputation</h2>
+    <div class="prose">
+      <p>Underneath the goal is one thing: reputation.</p>
+      <p><a class="u" href="https://cheap-signal.vercel.app/">Cheap Signal</a> argued a cosign only holds value while it stays costly. This is the next step: how to keep it costly while Cosign grows.</p>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">02</span>
+    <h2 class="display h-md">What Cosign already built</h2>
+    <div class="prose">
+      <p>Cosign's community lists ask questions like "Who's a young person you think will be a star?"</p>
+      <p>Discourse by Cosign gives tech leaders a curated place to talk. It is a natural home for vouched work.</p>
+      <p>Those lists are already judgment from people. That is the core of this idea.</p>
+      <p>A natural next step could be to extend that judgment to the work itself.</p>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">03</span>
+    <h2 class="display h-md">Two ways to build reputation</h2>
+    <div class="prose">
+      <p><strong>Scarcity, through access.</strong> Who lets you in. Who vouches for you.</p>
+      <p><strong>Abundance, through engagement.</strong> How much you post. How many people see it.</p>
+      <p>LinkedIn runs on abundance. That is where the slop comes from.</p>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">04</span>
+    <h2 class="display h-md">The real problem is quality</h2>
+    <div class="prose">
+      <table class="grid">
+        <thead><tr><th></th><th>Reach</th><th>Quality</th></tr></thead>
+        <tbody>
+          <tr><th>Scarcity</th><td>Small, slow</td><td>High</td></tr>
+          <tr><th>Abundance</th><td>Big, fast</td><td>Collapses</td></tr>
+          <tr class="goal"><th>The goal</th><td>Big</td><td>High</td></tr>
+        </tbody>
+      </table>
+      <p>Scarcity alone keeps quality high. But it is too small and too slow to replace LinkedIn.</p>
+      <p>Abundance alone grows fast. But quality falls apart.</p>
+      <p>Cosign needs the reach of abundance without losing the quality that scarcity protects.</p>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">05</span>
+    <h2 class="display h-md">What if every member was a creator?</h2>
+    <div class="prose">
+      <p>Builders have to create today anyway.</p>
+      <p>a16z is a powerhouse in part because of an excellent media practice. Every touchpoint is excellent: their X, their Substack, their blog, their LinkedIn. The partners who write hold themselves to a standard. That standard is the brand.</p>
+      <p>Excellence attracts excellence. That is what people want to be near.</p>
+      <p>If members create, the content and the network could grow from the same act.</p>
+      <p><strong>More creators doesn't mean more slop.</strong> Not if volume earns nothing. What if only work that someone named vouches for counted toward your reputation? A post nobody vouches for would carry no weight.</p>
+      <p>Your name could grow when the people and work you backed succeed. One strong piece would beat ten weak ones.</p>
+      <p>And your work would land in front of the people who decide your next job, deal, or hire.</p>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">06</span>
+    <h2 class="display h-md">How it could hold up</h2>
+    <div class="prose">
+      <div class="qa">
+        <p class="label">What counts as success</p>
+        <p>One answer could be concrete outcomes. A hire, a launch, or a deal, confirmed by the people involved.</p>
+      </div>
+      <div class="qa">
+        <p class="label">Gaming</p>
+        <p>One way to handle gaming could be a small number of cosigns per person. An early bet that does not work out would cost only a little standing. An early bet that pays off would earn a lot of credit, so spotting talent first is rewarded most. Cosigns traded back and forth could count for less.</p>
+      </div>
+      <div class="qa">
+        <p class="label">Cold start</p>
+        <p>A new member could get in with one vouch from someone with a strong reputation. That person would put some of their own name on the line. What if a new member's first pieces were shown to the person who vouched them in and that person's circle? Good early work could then earn its first cosign.</p>
+      </div>
+      <div class="qa">
+        <p class="label">Unfair decay</p>
+        <p>What if reputation came from the track record of your judgment, not how often you post? It could fade slowly. A busy builder who posts rarely but well would keep their standing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row wrap">
+    <span class="mono">07</span>
+    <h2 class="display h-md">Possible ways forward</h2>
+    <div class="prose">
+      <ol class="list">
+        <li>What if a post had to be real work, like a launch, a write-up, or a project, not a status update?</li>
+        <li>What if members could cosign a piece of work, not just a person, with their name shown on it?</li>
+        <li>What if each member had a small number of cosigns each month, so every one means something?</li>
+        <li>What if a profile showed only the work others vouched for, and who vouched for it?</li>
+        <li>What if the biggest credit went to people who backed someone early and were right?</li>
+      </ol>
+      <p class="end">Reputation is what people expect of you, based on evidence they trust. LinkedIn made that evidence cheap. Cosign can make it costly again.</p>
+    </div>
+  </section>
+
+  <footer class="wrap foot">
+    <span class="mono">Signal, Not Slop</span>
+    <span class="mono">October 2026</span>
+  </footer>
+</main>
+</body>
+</html>
