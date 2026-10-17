@@ -1,0 +1,40 @@
+# Shared site checks. The same file is copied into every site repo (source: velvetchief/drop-kit templates/site-checks.yml).
+# SITE_STYLE: "superintel" runs the Superintel style check (Antonio, Archivo, IBM Plex Mono, no Inter). "none" skips it.
+name: site-checks
+on:
+  push:
+  pull_request:
+env:
+  SITE_STYLE: superintel
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('package.json') != ''
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        if: hashFiles('package.json') != ''
+        run: npm ci
+      - name: Lint
+        if: hashFiles('package.json') != ''
+        run: npm run lint --if-present
+      - name: Typecheck
+        if: hashFiles('tsconfig.json') != ''
+        run: |
+          if [ -d app ] && grep -q '"next"' package.json; then npx next typegen; fi
+          npx tsc --noEmit
+      - name: Tests
+        if: hashFiles('package.json') != ''
+        run: npm test --if-present
+      - name: Build
+        if: hashFiles('package.json') != ''
+        run: npm run build --if-present
+      - name: Legal check (fonts, session replay, email footer)
+        run: bash scripts/ci/legal_check.sh .
+      - name: Style check
+        if: env.SITE_STYLE == 'superintel'
+        run: bash scripts/ci/style_check.sh .
